@@ -28,10 +28,9 @@ Graph traversal algorithm that starts from the root node and explores all of its
 
 ## Setting Up
 - Clone this repository on your terminal `https://github.com/pandaandsushi/Tucil3_13522012.git`
-- Go to the `frontend` directory by using `cd src/frontend`
-- Type in `npm install` to start the server on your local browser
-- Type in `npm start` to start the server on your local browser\
-- You are done :>
+- Option 1: use VSCode and change directory to `cd src`. Type in `javac Main.java` then `java Main`.
+- Option 2: use terminal and 
+- Option 3: run the exe  
 
 ## How to Use
 - Input the start node and end node with words as the Wikipedia title page
@@ -46,13 +45,20 @@ Graph traversal algorithm that starts from the root node and explores all of its
 │   ├── XXXX
 │   └── Tucil3_13522012.pdf
 ├── doc
-│   ├── XXXX
-│   └── gomugomuno.pdf
+│   └── Tucil3_13522012.pdf
 ├── src
-│   ├── XXXX
-│   └── gomugomuno.pdf
+│   ├── Dictionary.txt
+│   ├── Dict.java
+│   ├── Node.java
+│   ├── Greedy.java
+│   ├── Ucs.java
+│   ├── Astar.java
+│   └── Main.java
 ├── test
-│   ├── XXXX
-│   └── gomugomuno.pdf
+│   ├── tes1.pdf
+│   ├── tes2.pdf
+│   ├── tes3.pdf
+│   ├── tes4.pdf
+│   └── tes5.txt
 ```
 ## Thankyou for trying my program :>

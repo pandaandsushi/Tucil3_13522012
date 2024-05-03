@@ -4,15 +4,19 @@ public class Main{
         System.out.println("Welcome to Word Ladder Solver ^^");
         Dict wordDictionary = new Dict("Dictionary.txt");
         Scanner scanner = new Scanner(System.in);
+        String start;
+        String finish;
+        List<String> solution;
         while (true) {
-            String start;
-            String finish;
             System.out.println("-----------------------------------------");
             System.out.println("Enter the start and finish word");
             System.out.print("Start: ");
             start = scanner.next();
             System.out.print("Finish: ");
             finish = scanner.next();
+            // testing in here
+            // List<String> neighbors = Ucs.generateNeighbors(start,wordDictionary);
+            // neighbors.forEach(System.out::println);
             if (start.length()==finish.length()){
                 if (start.equals(finish)){
                     System.out.println("Both cannot be the same word");
@@ -45,7 +49,13 @@ public class Main{
             String input = scanner.next();
             if (input.equals("1")){
                 System.out.println("You have chosen UCS algo!");
-                
+                solution = Ucs.findUCS(start, finish, wordDictionary);
+                if (solution != null) {
+                    System.out.println("Solution found: ");
+                    solution.forEach(System.out::println);
+                } else {
+                    System.out.println("No solution found.");
+                }
                 break;
             }
             else if (input.equals("2")){
