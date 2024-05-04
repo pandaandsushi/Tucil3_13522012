@@ -6,9 +6,9 @@ public class Greedy {
         Set<String> visited = new HashSet<>();
         Node initial = new Node(start, null, 0);
         queue.offer(initial);
-        result.add(initial.getWord());
         while (!queue.isEmpty()) {
             Node currentNode = queue.poll();
+            result.add(currentNode.getWord());
             // DEBUG
             System.out.print("Sekarang kita check Node:");
             System.out.println(currentNode.getWord());
@@ -25,7 +25,7 @@ public class Greedy {
             for (String neighbor : Functions.generateNeighbors(currentNode.getWord(),dictionary)) {
                 if (!visited.contains(neighbor)) {
                     visited.add(neighbor);
-                    int cost = currentNode.getCost() + 1;
+                    int cost = currentNode.getCost() + 1 + ;
                     queue.offer(new Node(neighbor, currentNode, cost));
                 }
             }

@@ -4,6 +4,7 @@ public class Main{
         if (solution != null) {
             System.out.println("Solution found: ");
             solution.forEach(System.out::println);
+            System.out.println("The shortest solution length: " + solution.size());
         } else {
             System.out.println("No solution found.");
         }
@@ -17,7 +18,6 @@ public class Main{
             String start;
             String finish;
             List<String> solution;
-            long startTime;
             while (true) {
                 System.out.println("-----------------------------------------");
                 System.out.println("Enter the start and finish word");
@@ -59,26 +59,23 @@ public class Main{
                 System.out.print(">> ");
                 String input = scanner.next();
                 if(input.equals("1") || input.equals("2") || input.equals("3")){
-                    startTime = System.nanoTime(); // Record start time
-
+                    Result res=null;
                     if (input.equals("1")){
                         System.out.println("You have chosen UCS algo!");
-                        solution = Ucs.findUCS(start, finish, wordDictionary);
-                        printOutSol(solution);
-                        
+                        res = Ucs.findUCS(start, finish, wordDictionary);
+                        break;
                     }
                     else if (input.equals("2")){
                         System.out.println("You have chosen Greedy algo!");
-                        // TODO
+                        // res = Greedy.findGreedy();
+                        break;
                     }
                     else if (input.equals("3")){
                         System.out.println("You have chosen A* algo!");
-                        // TODO
+                        break;
                     }
-                    long endTime = System.nanoTime(); // Record end time
-                    double elapsedTimeInSeconds = (endTime - startTime) / 1e9; // Calculate elapsed time in seconds
-                    System.out.println("Algorithm execution time: " + elapsedTimeInSeconds + " seconds");
-                    break;
+                    printOutSol(res.getResultlist());
+                    System.out.println("Algorithm execution time: " + res.getexecutiontime() + " seconds");
                 }
                 else if (input.equals("0")){
                     System.out.println("Quitting...");
