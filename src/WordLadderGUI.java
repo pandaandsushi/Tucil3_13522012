@@ -52,9 +52,10 @@ public class WordLadderGUI extends JFrame {
     private void findWordLadder() {
         String start = startField.getText().trim();
         String end = endField.getText().trim();
-
+        long startTime = System.nanoTime();
         List<String> ladder = Ucs.findUCS(start, end, wordDictionary);
-
+        long endTime = System.nanoTime(); // Record end time
+        double elapsedTimeInSeconds = (endTime - startTime) / 1e9; // Calculate elapsed time in seconds
         if (ladder != null) {
             listModel.clear();
             for (String word : ladder) {
