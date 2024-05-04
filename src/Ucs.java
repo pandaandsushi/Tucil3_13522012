@@ -31,7 +31,10 @@ public class Ucs {
                 }
             }
         }
-        return null;
+        long endTime = System.nanoTime(); // Record end time
+        double elapsedTimeInSeconds = (endTime - startTime) / 1e9; // Calculate elapsed time in seconds
+        r1 = new Result(null, numofcheckednodes, elapsedTimeInSeconds);
+        return r1;
     }
 
     

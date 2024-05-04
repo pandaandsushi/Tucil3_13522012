@@ -17,7 +17,6 @@ public class Main{
             Scanner scanner = new Scanner(System.in);
             String start;
             String finish;
-            List<String> solution;
             while (true) {
                 System.out.println("-----------------------------------------");
                 System.out.println("Enter the start and finish word");
@@ -36,10 +35,10 @@ public class Main{
                         System.out.println("Both words do not exist in the dictionary.");
                     }
                     else if (!wordDictionary.containsWord(start)){
-                        System.out.println("Start word does not exists in the dictionary.");
+                        System.out.println("Start word does not exist in the dictionary.");
                     }
                     else if (!wordDictionary.containsWord(finish)){
-                        System.out.println("Finish word does not exists in the dictionary.");
+                        System.out.println("Finish word does not exist in the dictionary.");
                     }
                     else{
                         break;
@@ -59,23 +58,31 @@ public class Main{
                 System.out.print(">> ");
                 String input = scanner.next();
                 if(input.equals("1") || input.equals("2") || input.equals("3")){
-                    Result res=null;
+                    Result res;
                     if (input.equals("1")){
                         System.out.println("You have chosen UCS algo!");
                         res = Ucs.findUCS(start, finish, wordDictionary);
+                        printOutSol(res.getResultlist());
+                        System.out.println("Num of nodes checked: " + res.getnumofcheckednodes());
+                        System.out.println("Algorithm execution time: " + res.getexecutiontime() + " seconds");
                         break;
                     }
                     else if (input.equals("2")){
                         System.out.println("You have chosen Greedy algo!");
-                        // res = Greedy.findGreedy();
+                        res = Greedy.findGreedy(start, finish, wordDictionary);
+                        printOutSol(res.getResultlist());
+                        System.out.println("Num of nodes checked: " + res.getnumofcheckednodes());
+                        System.out.println("Algorithm execution time: " + res.getexecutiontime() + " seconds");
                         break;
                     }
                     else if (input.equals("3")){
                         System.out.println("You have chosen A* algo!");
+                        // res = Astar.findAstar(start, finish, wordDictionary);
+                        // printOutSol(res.getResultlist());
+                        // System.out.println("Num of nodes checked: " + res.getnumofcheckednodes());
+                        // System.out.println("Algorithm execution time: " + res.getexecutiontime() + " seconds");
                         break;
                     }
-                    printOutSol(res.getResultlist());
-                    System.out.println("Algorithm execution time: " + res.getexecutiontime() + " seconds");
                 }
                 else if (input.equals("0")){
                     System.out.println("Quitting...");
