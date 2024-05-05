@@ -35,9 +35,9 @@ none.
 
 ## Setting Up
 - Clone this repository on your terminal `git clone https://github.com/pandaandsushi/Tucil3_13522012.git`
-- Option 1: use terminal and change directory to `cd src`. Type in `javac Main.java` then `java Main`.
-- Option 2: use GUI and change directory to `cd src`. Type in `javac WordLadderGUI.java` then `java WordLadderGUI`.
-- Option 3: run the exe  
+- Option 1 (CLI): use terminal and change directory to `cd src`. Type in `javac Main.java` then `java Main`.
+- Option 2 (GUI terminal): use terminal and change directory to `cd src`. Type in `javac WordLadderGUI.java` then `java WordLadderGUI`.
+- Option 3 (jar): run jar file via `java -cp GUI.jar WordLadderGUI`
 
 ## How to Use
 - Input the start word and end word
@@ -47,26 +47,29 @@ none.
 ## File structure
 ```
 .
+├── GUI.jar
 ├── README.md
+├── Dictionary.txt
+├── manifest.txt
 ├── bin
-│   └── Tucil3_13522012.pdf
+│   ├── WordLadderGUI.class
+│   |── WordLadderGUI$1.class
+│   ├── WordLadderGUI$2.class
+│   ├── Dict.class
+│   ├── Node.class
+│   ├── Algorithm.class
+│   ├── Funtions.class
+│   ├── Result.class
+│   └── Main.class
 ├── doc
 │   └── Tucil3_13522012.pdf
 ├── src
-│   ├── Dictionary.txt
 │   ├── Dict.java
 │   ├── Node.java
 │   ├── Algorithm.java
 │   ├── Funtions.java
 │   ├── Result.java
 │   ├── WordLadderGUI.java
-│   ├── Dict.class
-│   ├── Node.class
-│   ├── Algorithm.class
-│   ├── Funtions.class
-│   ├── Result.class
-│   ├── WordLadderGUI.class
-│   ├── Main.class
 │   └── Main.java
 ├── test
 │   ├── tc1.txt

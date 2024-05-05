@@ -66,28 +66,34 @@ public class WordLadderGUI extends JFrame {
         long startTime = System.nanoTime();
         // Exceptions
         if (start.length() != end.length()) {
-            JOptionPane.showMessageDialog(this, "Both words need to be the same length.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Both words need to be the same length.", 
+            "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (start.equals(end)) {
-            JOptionPane.showMessageDialog(this, "Start and end words cannot be the same.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Start and end words cannot be the same.", 
+            "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (!wordDictionary.containsWord(start) && !wordDictionary.containsWord(end)) {
-            JOptionPane.showMessageDialog(this, "Both words do not exist in the dictionary.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Both words do not exist in the dictionary.", 
+            "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (!wordDictionary.containsWord(start)) {
-            JOptionPane.showMessageDialog(this, "Start word does not exist in the dictionary.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Start word does not exist in the dictionary.", 
+            "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (!wordDictionary.containsWord(end)) {
-            JOptionPane.showMessageDialog(this, "End word does not exist in the dictionary.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "End word does not exist in the dictionary.", 
+            "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         String[] options = {"Uniform Cost Search", "Greedy Best First Search", "A*"};
-        int selectedOption = JOptionPane.showOptionDialog(this, "Choose algorithm to solve:", "Algorithm Selection",
+        int selectedOption = JOptionPane.showOptionDialog(this, "Choose algorithm to solve:", 
+        "Algorithm Selection",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
         String algorithmName;
         switch (selectedOption) {
@@ -117,9 +123,12 @@ public class WordLadderGUI extends JFrame {
             // Set result label text
             resultLabel.setBounds(0, 320, 250, 50); 
             resultLabel.setText("<html><div style='text-align: left;'>" + "Length: " + res.getResultlist().size()
-                    + "<br>Nodes checked: " + res.getnumofcheckednodes() + "<br>Execution time: " + elapsedTimeInSeconds + " seconds</div></html>");
+                    + "<br>Nodes checked: " + res.getnumofcheckednodes() + "<br>Execution time: " 
+                    + elapsedTimeInSeconds + " seconds</div></html>");
         } else {
-            JOptionPane.showMessageDialog(this, "No solution found for " + algorithmName + ". \nNodes checked: " + res.getnumofcheckednodes() + ", \nExecution time: " + elapsedTimeInSeconds + " seconds", ":(", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No solution found for " + algorithmName + ". \nNodes checked: " 
+            + res.getnumofcheckednodes() + ", \nExecution time: " + elapsedTimeInSeconds + " seconds", 
+            ":(", JOptionPane.ERROR_MESSAGE);
         }
     }
 
