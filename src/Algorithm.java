@@ -1,7 +1,7 @@
 import java.util.*;
 public class Algorithm {
     public static Result findPath(String start, String end, Dict dictionary, String algorithmtype){
-        long startTime = System.nanoTime(); // Record start time
+        long startTime = System.nanoTime();
         Result r1;
         PriorityQueue<Node> queue = new PriorityQueue<>(Comparator.comparingInt(node -> node.getCost()));
         Set<String> visited = new HashSet<>();
@@ -13,8 +13,8 @@ public class Algorithm {
             
             // found
             if ((currentNode.getWord()).equals(end)){
-                long endTime = System.nanoTime(); // Record end time
-                double elapsedTimeInSeconds = (endTime - startTime) / 1e9; // Calculate elapsed time in seconds
+                long endTime = System.nanoTime();
+                double elapsedTimeInSeconds = (endTime - startTime) / 1e9;
                 r1 = new Result(Functions.backtrackPath(currentNode),numofcheckednodes,elapsedTimeInSeconds);
                 return r1;
             }
@@ -37,8 +37,8 @@ public class Algorithm {
                 }
             }
         }
-        long endTime = System.nanoTime(); // Record end time
-        double elapsedTimeInSeconds = (endTime - startTime) / 1e9; // Calculate elapsed time in seconds
+        long endTime = System.nanoTime();
+        double elapsedTimeInSeconds = (endTime - startTime) / 1e9;
         r1 = new Result(null, numofcheckednodes, elapsedTimeInSeconds);
         return r1;
     }

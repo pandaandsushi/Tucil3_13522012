@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.List;
 
 public class WordLadderGUI extends JFrame {
     private JTextField startField, endField;
@@ -12,17 +11,14 @@ public class WordLadderGUI extends JFrame {
     private Dict wordDictionary;
 
     public WordLadderGUI() {
-        setTitle("Word Ladder Solver");
-        setSize(400, 400);
+        setTitle("Word Ladder Solver :3");
+        setSize(400, 420);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Set background color
-        getContentPane().setBackground(new Color(240, 240, 240));
 
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(3, 2));
-        inputPanel.setBackground(new Color(240, 240, 240));
 
         JLabel startLabel = new JLabel("Start Word:");
         startField = new JTextField();
@@ -39,7 +35,6 @@ public class WordLadderGUI extends JFrame {
         inputPanel.add(startField);
         inputPanel.add(endLabel);
         inputPanel.add(endField);
-        inputPanel.add(findButton);
 
         listModel = new DefaultListModel<>();
         wordList = new JList<>(listModel);
@@ -49,10 +44,17 @@ public class WordLadderGUI extends JFrame {
         resultLabel = new JLabel();
         resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(inputPanel, BorderLayout.NORTH);
-        getContentPane().add(scrollPane, BorderLayout.CENTER);
-        getContentPane().add(resultLabel, BorderLayout.SOUTH);
+        getContentPane().setLayout(null); // Set null layout
+
+        inputPanel.setBounds(10, 10, 350, 90);
+        scrollPane.setBounds(10, 110, 350, 200);
+        resultLabel.setBounds(10, 320, 350, 50);
+        findButton.setBounds(250, 320, 110, 30);
+
+        getContentPane().add(inputPanel);
+        getContentPane().add(scrollPane);
+        getContentPane().add(resultLabel);
+        getContentPane().add(findButton);
 
         wordDictionary = new Dict("Dictionary.txt");
     }
@@ -113,8 +115,9 @@ public class WordLadderGUI extends JFrame {
                 listModel.addElement(word);
             }
             // Set result label text
-            resultLabel.setText("<html><center>" + algorithmName + " - Length: " + res.getResultlist().size()
-                    + "<br>Nodes checked: " + res.getnumofcheckednodes() + "<br>Execution time: " + elapsedTimeInSeconds + " seconds</center></html>");
+            resultLabel.setBounds(0, 320, 250, 50); 
+            resultLabel.setText("<html><div style='text-align: left;'>" + "Length: " + res.getResultlist().size()
+                    + "<br>Nodes checked: " + res.getnumofcheckednodes() + "<br>Execution time: " + elapsedTimeInSeconds + " seconds</div></html>");
         } else {
             JOptionPane.showMessageDialog(this, "No solution found for " + algorithmName + ". Nodes checked: " + res.getnumofcheckednodes() + ", Execution time: " + elapsedTimeInSeconds + " seconds", ":(", JOptionPane.ERROR_MESSAGE);
         }
