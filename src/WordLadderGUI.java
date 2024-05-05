@@ -8,22 +8,27 @@ public class WordLadderGUI extends JFrame {
     private JButton findButton;
     private JList<String> wordList;
     private DefaultListModel<String> listModel;
+    private JLabel resultLabel;
     private Dict wordDictionary;
 
     public WordLadderGUI() {
         setTitle("Word Ladder Solver");
-        setSize(400, 300);
+        setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        // Set background color
+        getContentPane().setBackground(new Color(240, 240, 240));
+
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(3, 2));
+        inputPanel.setBackground(new Color(240, 240, 240));
 
         JLabel startLabel = new JLabel("Start Word:");
         startField = new JTextField();
         JLabel endLabel = new JLabel("End Word:");
         endField = new JTextField();
-        findButton = new JButton("Find");
+        findButton = new JButton("Let's Go!!");
         findButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 findWordLadder();
@@ -41,11 +46,14 @@ public class WordLadderGUI extends JFrame {
 
         JScrollPane scrollPane = new JScrollPane(wordList);
 
+        resultLabel = new JLabel();
+        resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(inputPanel, BorderLayout.NORTH);
         getContentPane().add(scrollPane, BorderLayout.CENTER);
+        getContentPane().add(resultLabel, BorderLayout.SOUTH);
 
-        // Load dictionary
         wordDictionary = new Dict("Dictionary.txt");
     }
 
@@ -54,8 +62,9 @@ public class WordLadderGUI extends JFrame {
         String end = endField.getText().trim().toUpperCase();
         Result res;
         long startTime = System.nanoTime();
-        if (start.length()!=end.length()) {
-            JOptionPane.showMessageDialog(this, "Both needs to be the same length.", "Error", JOptionPane.ERROR_MESSAGE);
+        // Exceptions
+        if (start.length() != end.length()) {
+            JOptionPane.showMessageDialog(this, "Both words need to be the same length.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (start.equals(end)) {
@@ -63,7 +72,7 @@ public class WordLadderGUI extends JFrame {
             return;
         }
         if (!wordDictionary.containsWord(start) && !wordDictionary.containsWord(end)) {
-            JOptionPane.showMessageDialog(this, "Both word do not exist in the dictionary.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Both words do not exist in the dictionary.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (!wordDictionary.containsWord(start)) {
@@ -78,37 +87,48 @@ public class WordLadderGUI extends JFrame {
         String[] options = {"Uniform Cost Search", "Greedy Best First Search", "A*"};
         int selectedOption = JOptionPane.showOptionDialog(this, "Choose algorithm to solve:", "Algorithm Selection",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        String algorithmName;
         switch (selectedOption) {
             case 0:
                 res = Algorithm.findPath(start, end, wordDictionary, "UCS");
+                algorithmName = "Uniform Cost Search";
                 break;
             case 1:
                 res = Algorithm.findPath(start, end, wordDictionary, "GBFS");
+                algorithmName = "Greedy Best First Search";
                 break;
             case 2:
                 res = Algorithm.findPath(start, end, wordDictionary, "Astar");
+                algorithmName = "A*";
                 break;
             default:
                 return;
         }
-        long endTime = System.nanoTime(); // Record end time
-        double elapsedTimeInSeconds = (endTime - startTime) / 1e9; // Calculate elapsed time in seconds
+        long endTime = System.nanoTime();
+        double elapsedTimeInSeconds = (endTime - startTime) / 1e9;
+        // Print res
         if (res.getResultlist() != null) {
             listModel.clear();
             for (String word : res.getResultlist()) {
                 listModel.addElement(word);
             }
-            JOptionPane.showMessageDialog(this, "Word ladder found. Length: " + res.getResultlist().size()
-                    + "\nNodes checked: " + res.getnumofcheckednodes() + "\nExecution time: " + elapsedTimeInSeconds + " seconds",
-                    "Found it :)", JOptionPane.INFORMATION_MESSAGE);
+            // Set result label text
+            resultLabel.setText("<html><center>" + algorithmName + " - Length: " + res.getResultlist().size()
+                    + "<br>Nodes checked: " + res.getnumofcheckednodes() + "<br>Execution time: " + elapsedTimeInSeconds + " seconds</center></html>");
         } else {
-            JOptionPane.showMessageDialog(this, "Sadly, there's no solution for it." + "\nNodes checked: " + res.getnumofcheckednodes() + "\nExecution time: " + elapsedTimeInSeconds + " seconds", ":(", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No solution found for " + algorithmName + ". Nodes checked: " + res.getnumofcheckednodes() + ", Execution time: " + elapsedTimeInSeconds + " seconds", ":(", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 WordLadderGUI gui = new WordLadderGUI();
                 gui.setVisible(true);
             }

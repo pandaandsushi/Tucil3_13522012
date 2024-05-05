@@ -24,9 +24,6 @@ public class Main{
                 start = scanner.next().toUpperCase();
                 System.out.print("Finish: ");
                 finish = scanner.next().toUpperCase();
-                // testing in here
-                // List<String> neighbors = Ucs.generateNeighbors(start,wordDictionary);
-                // neighbors.forEach(System.out::println);
                 if (start.length()==finish.length()){
                     if (start.equals(finish)){
                         System.out.println("Both cannot be the same word");
