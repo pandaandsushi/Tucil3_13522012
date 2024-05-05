@@ -50,19 +50,59 @@ public class WordLadderGUI extends JFrame {
     }
 
     private void findWordLadder() {
-        String start = startField.getText().trim();
-        String end = endField.getText().trim();
+        String start = startField.getText().trim().toUpperCase();
+        String end = endField.getText().trim().toUpperCase();
+        Result res;
         long startTime = System.nanoTime();
-        List<String> ladder = Ucs.findUCS(start, end, wordDictionary);
+        if (start.length()!=end.length()) {
+            JOptionPane.showMessageDialog(this, "Both needs to be the same length.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (start.equals(end)) {
+            JOptionPane.showMessageDialog(this, "Start and end words cannot be the same.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!wordDictionary.containsWord(start) && !wordDictionary.containsWord(end)) {
+            JOptionPane.showMessageDialog(this, "Both word do not exist in the dictionary.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!wordDictionary.containsWord(start)) {
+            JOptionPane.showMessageDialog(this, "Start word does not exist in the dictionary.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!wordDictionary.containsWord(end)) {
+            JOptionPane.showMessageDialog(this, "End word does not exist in the dictionary.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String[] options = {"Uniform Cost Search", "Greedy Best First Search", "A*"};
+        int selectedOption = JOptionPane.showOptionDialog(this, "Choose algorithm to solve:", "Algorithm Selection",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        switch (selectedOption) {
+            case 0:
+                res = Algorithm.findPath(start, end, wordDictionary, "UCS");
+                break;
+            case 1:
+                res = Algorithm.findPath(start, end, wordDictionary, "GBFS");
+                break;
+            case 2:
+                res = Algorithm.findPath(start, end, wordDictionary, "Astar");
+                break;
+            default:
+                return;
+        }
         long endTime = System.nanoTime(); // Record end time
         double elapsedTimeInSeconds = (endTime - startTime) / 1e9; // Calculate elapsed time in seconds
-        if (ladder != null) {
+        if (res.getResultlist() != null) {
             listModel.clear();
-            for (String word : ladder) {
+            for (String word : res.getResultlist()) {
                 listModel.addElement(word);
             }
+            JOptionPane.showMessageDialog(this, "Word ladder found. Length: " + res.getResultlist().size()
+                    + "\nNodes checked: " + res.getnumofcheckednodes() + "\nExecution time: " + elapsedTimeInSeconds + " seconds",
+                    "Found it :)", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "No word ladder found.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Sadly, there's no solution for it." + "\nNodes checked: " + res.getnumofcheckednodes() + "\nExecution time: " + elapsedTimeInSeconds + " seconds", ":(", JOptionPane.ERROR_MESSAGE);
         }
     }
 
