@@ -44,7 +44,7 @@ public class WordLadderGUI extends JFrame {
         resultLabel = new JLabel();
         resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        getContentPane().setLayout(null); // Set null layout
+        getContentPane().setLayout(null);
 
         inputPanel.setBounds(10, 10, 350, 90);
         scrollPane.setBounds(10, 110, 350, 200);
@@ -119,7 +119,7 @@ public class WordLadderGUI extends JFrame {
             resultLabel.setText("<html><div style='text-align: left;'>" + "Length: " + res.getResultlist().size()
                     + "<br>Nodes checked: " + res.getnumofcheckednodes() + "<br>Execution time: " + elapsedTimeInSeconds + " seconds</div></html>");
         } else {
-            JOptionPane.showMessageDialog(this, "No solution found for " + algorithmName + ". Nodes checked: " + res.getnumofcheckednodes() + ", Execution time: " + elapsedTimeInSeconds + " seconds", ":(", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No solution found for " + algorithmName + ". \nNodes checked: " + res.getnumofcheckednodes() + ", \nExecution time: " + elapsedTimeInSeconds + " seconds", ":(", JOptionPane.ERROR_MESSAGE);
         }
     }
 
