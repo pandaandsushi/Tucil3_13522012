@@ -30,4 +30,24 @@ public class Functions {
             System.out.println(node.getWord().toString());
         }
     }
+
+    public static List<String> backtrackPath(Node node){
+        List<String> result = new ArrayList<>();
+        Node currentNode = node;
+        while (currentNode!=null) {
+            result.add(0,currentNode.getWord());
+            currentNode = currentNode.getParent();
+        }
+        return result;
+    }
+
+    public static int hamming_distance(String word, String goal){
+        int dist = 0;
+        for (int i = 0; i<word.length(); i++){
+            if (word.charAt(i) != goal.charAt(i)) {
+                dist++;
+            }
+        }
+        return dist;
+    }
 }

@@ -61,7 +61,7 @@ public class Main{
                     Result res;
                     if (input.equals("1")){
                         System.out.println("You have chosen UCS algo!");
-                        res = Ucs.findUCS(start, finish, wordDictionary);
+                        res = Algorithm.findPath(start, finish, wordDictionary, "UCS");
                         printOutSol(res.getResultlist());
                         System.out.println("Num of nodes checked: " + res.getnumofcheckednodes());
                         System.out.println("Algorithm execution time: " + res.getexecutiontime() + " seconds");
@@ -69,7 +69,7 @@ public class Main{
                     }
                     else if (input.equals("2")){
                         System.out.println("You have chosen Greedy algo!");
-                        res = Greedy.findGreedy(start, finish, wordDictionary);
+                        res = Algorithm.findPath(start, finish, wordDictionary, "GBFS");
                         printOutSol(res.getResultlist());
                         System.out.println("Num of nodes checked: " + res.getnumofcheckednodes());
                         System.out.println("Algorithm execution time: " + res.getexecutiontime() + " seconds");
@@ -77,10 +77,10 @@ public class Main{
                     }
                     else if (input.equals("3")){
                         System.out.println("You have chosen A* algo!");
-                        // res = Astar.findAstar(start, finish, wordDictionary);
-                        // printOutSol(res.getResultlist());
-                        // System.out.println("Num of nodes checked: " + res.getnumofcheckednodes());
-                        // System.out.println("Algorithm execution time: " + res.getexecutiontime() + " seconds");
+                        res = Algorithm.findPath(start, finish, wordDictionary, "Astar");
+                        printOutSol(res.getResultlist());
+                        System.out.println("Num of nodes checked: " + res.getnumofcheckednodes());
+                        System.out.println("Algorithm execution time: " + res.getexecutiontime() + " seconds");
                         break;
                     }
                 }
